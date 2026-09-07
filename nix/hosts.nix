@@ -3,7 +3,7 @@ let
   cfg = config.flake;
   rrvshSshAuthorizedKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILdsZyY3gu8IGB8MzMnLdh+ClDxQQ2RYG9rkeetIKq8n"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDAgeb4QgH9YPUfS9lG2GMC1/fnxaxCX2F+lbgfxN1d6"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDLcRImvoSjFw76bLEXMBegksn86ymGVKOaf6XDlp38O"
   ];
   rafiq = {
     name = "rafiq";
