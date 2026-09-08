@@ -104,8 +104,8 @@ in
           memory.write_approval = true;
           skills.write_approval = true;
           cron = {
-            inherit (cheapModel) model;
-            model_provider = cheapModel.provider;
+            model = "gpt-5.6-sol";
+            model_provider = "openai-codex";
           };
         };
       };
