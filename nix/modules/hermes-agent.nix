@@ -96,10 +96,17 @@ in
               };
             };
           delegation = delegationModel;
-          mcp_servers.linear = {
-            url = "https://mcp.linear.app/mcp";
-            auth = "oauth";
-            sampling.enabled = false;
+          mcp_servers = {
+            atlassian = {
+              url = "https://mcp.atlassian.com/v2/mcp";
+              auth = "oauth";
+              sampling.enabled = false;
+            };
+            linear = {
+              url = "https://mcp.linear.app/mcp";
+              auth = "oauth";
+              sampling.enabled = false;
+            };
           };
           memory.write_approval = true;
           skills.write_approval = true;
