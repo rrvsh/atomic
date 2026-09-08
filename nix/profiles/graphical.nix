@@ -29,7 +29,10 @@ in
           remapCapsLockToEscape = true;
         };
       };
-      homebrew.casks = [ "mixxx" ];
+      homebrew.casks = [
+        "mixxx"
+        "linearmouse"
+      ];
       home-manager.sharedModules = [
         inputs.mac-app-util.homeManagerModules.default
         {
