@@ -1,7 +1,7 @@
 {
   config,
-  lib,
   inputs,
+  lib,
   ...
 }:
 let
@@ -37,7 +37,9 @@ in
             alt-tab-macos
             monitorcontrol
           ];
+          # mac-app-util needs the linked app directory to create Spotlight-indexed trampolines.
           targets.darwin.copyApps.enable = lib.mkForce false;
+          targets.darwin.linkApps.enable = true;
         }
       ];
     };
