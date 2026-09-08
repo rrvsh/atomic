@@ -3,7 +3,7 @@ let
   cfg = config.flake;
   tailscaleAddresses = {
     alpha = "100.103.246.12";
-    file = "100.109.192.110";
+    kikir = "100.109.192.110";
     mercury = "100.127.209.56";
     nemesis = "100.98.114.23";
   };

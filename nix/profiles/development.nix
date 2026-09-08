@@ -88,7 +88,7 @@ in
             id = "SWMTPZZ-NIU7DVO-W6D5TNN-5ET4XCC-D3CE2JF-KNABVQO-MTW37ZD-TUD4SQZ";
             addresses = [ "tcp://100.103.246.12:22000" ];
           };
-          file = {
+          kikir = {
             id = "4ZT5BUS-XHEVH3L-C3Z4XPK-RHCAYGR-HH7GWYE-IH2BJ24-A7XX4YU-R6BYTQI";
             addresses = [ "tcp://100.109.192.110:22000" ];
           };

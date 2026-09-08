@@ -32,7 +32,7 @@ in
         cfg.modules.darwin.rosetta-builder
       ];
     };
-    file = {
+    kikir = {
       hostPlatform = "aarch64-darwin";
       primaryUser = rafiq;
       profiles = [
