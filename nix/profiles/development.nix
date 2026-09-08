@@ -88,6 +88,10 @@ in
             id = "SWMTPZZ-NIU7DVO-W6D5TNN-5ET4XCC-D3CE2JF-KNABVQO-MTW37ZD-TUD4SQZ";
             addresses = [ "tcp://100.103.246.12:22000" ];
           };
+          file = {
+            id = "4ZT5BUS-XHEVH3L-C3Z4XPK-RHCAYGR-HH7GWYE-IH2BJ24-A7XX4YU-R6BYTQI";
+            addresses = [ "tcp://100.109.192.110:22000" ];
+          };
           mercury = {
             id = "AXYVAEZ-LWIJDVN-6C2YABB-GI3M3QS-E6ZSI4D-ZBCYWD5-CD5MPS5-H2ZBAQG";
             addresses = [ "tcp://100.127.209.56:22000" ];

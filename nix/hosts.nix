@@ -1,4 +1,9 @@
-{ config, inputs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 let
   cfg = config.flake;
   rrvshSshAuthorizedKeys = [
@@ -25,6 +30,57 @@ in
       modules = [
         cfg.modules.darwin.user-primary
         cfg.modules.darwin.rosetta-builder
+      ];
+    };
+    file = {
+      hostPlatform = "aarch64-darwin";
+      primaryUser = rafiq;
+      profiles = [
+        "graphical"
+        "development"
+      ];
+      modules = [
+        cfg.modules.darwin.user-primary
+        (
+          { pkgs, ... }:
+          {
+            users.users.rafiq.uid = lib.mkForce 502;
+            home-manager.sharedModules = [
+              {
+                home.packages = [
+                  pkgs.awscli2
+                  pkgs.colima
+                  pkgs.docker-client
+                  pkgs.goose
+                  pkgs.nodejs_24
+                  (pkgs.writeShellApplication {
+                    name = "awslocal";
+                    runtimeInputs = [ pkgs.awscli2 ];
+                    text = ''
+                      export AWS_ACCESS_KEY_ID="''${AWS_ACCESS_KEY_ID:-test}"
+                      export AWS_SECRET_ACCESS_KEY="''${AWS_SECRET_ACCESS_KEY:-test}"
+                      export AWS_DEFAULT_REGION="''${AWS_DEFAULT_REGION:-us-east-1}"
+                      exec aws --endpoint-url="''${AWS_ENDPOINT_URL:-http://localhost:4566}" "$@"
+                    '';
+                  })
+                  (pkgs.writeShellApplication {
+                    name = "pnpm";
+                    runtimeInputs = [ pkgs.nodejs_24 ];
+                    text = ''
+                      exec corepack pnpm "$@"
+                    '';
+                  })
+                ];
+                programs.fish.plugins = [
+                  {
+                    name = "nvm";
+                    inherit (pkgs.fishPlugins.nvm) src;
+                  }
+                ];
+              }
+            ];
+          }
+        )
       ];
     };
   };
