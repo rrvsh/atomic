@@ -100,6 +100,11 @@ in
             atlassian = {
               url = "https://mcp.atlassian.com/v2/mcp";
               auth = "oauth";
+              connect_timeout = 3660;
+              oauth = {
+                flow = "browser";
+                timeout = 3600;
+              };
               sampling.enabled = false;
             };
             linear = {

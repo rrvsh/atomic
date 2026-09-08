@@ -26,7 +26,13 @@ in
               set -euo pipefail
 
               jq -e '
-                .mcpServers.linear == {
+                .mcpServers.atlassian == {
+                  "url": "https://mcp.atlassian.com/v2/mcp",
+                  "auth": "oauth",
+                  "lifecycle": "lazy",
+                  "directTools": false
+                }
+                and .mcpServers.linear == {
                   "url": "https://mcp.linear.app/mcp",
                   "auth": "oauth",
                   "lifecycle": "lazy",
@@ -36,7 +42,14 @@ in
 
               hermes_config="$(grep -oEm1 '/nix/store/[a-z0-9]+-hermes-config\.yaml' ${hermesActivation})"
               jq -e '
-                .mcp_servers.linear == {
+                .mcp_servers.atlassian == {
+                  "url": "https://mcp.atlassian.com/v2/mcp",
+                  "auth": "oauth",
+                  "connect_timeout": 3660,
+                  "oauth": { "flow": "browser", "timeout": 3600 },
+                  "sampling": { "enabled": false }
+                }
+                and .mcp_servers.linear == {
                   "url": "https://mcp.linear.app/mcp",
                   "auth": "oauth",
                   "sampling": { "enabled": false }
@@ -46,9 +59,12 @@ in
               jq -e '.packages | index("npm:pi-mcp-adapter") != null' ${piSettings} >/dev/null
 
               ${hermesBin} mcp login --help | grep -F 'usage: hermes mcp login' >/dev/null
+              ${hermesBin} mcp login --help | grep -F -- '--flow' >/dev/null
+              ${hermesBin} mcp login --help | grep -F 'device' >/dev/null
               export HERMES_HOME="$TMPDIR/hermes"
               mkdir -p "$HERMES_HOME"
               cp "$hermes_config" "$HERMES_HOME/config.yaml"
+              ${hermesBin} mcp list | grep -F 'atlassian' >/dev/null
               ${hermesBin} mcp list | grep -F 'linear' >/dev/null
               test ! -e "$HERMES_HOME/mcp-tokens"
 

@@ -31,7 +31,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     hermes-agent = {
-      url = "github:NousResearch/hermes-agent/4903993cdd9747a8a0e11d4022d88d1e20b33eb4";
+      url = "github:NousResearch/hermes-agent/2237be355906fbe6065ce1815711eee52b2d646e";
       inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
