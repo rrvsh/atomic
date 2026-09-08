@@ -47,15 +47,15 @@ in
             users.users.rafiq.uid = lib.mkForce 502;
             home-manager.sharedModules = [
               {
-                home.packages = [
-                  pkgs.awscli2
-                  pkgs.colima
-                  pkgs.docker-client
-                  pkgs.goose
-                  pkgs.nodejs_24
-                  (pkgs.writeShellApplication {
+                home.packages = with pkgs; [
+                  awscli2
+                  colima
+                  docker-client
+                  goose
+                  nodejs_24
+                  (writeShellApplication {
                     name = "awslocal";
-                    runtimeInputs = [ pkgs.awscli2 ];
+                    runtimeInputs = [ awscli2 ];
                     text = ''
                       export AWS_ACCESS_KEY_ID="''${AWS_ACCESS_KEY_ID:-test}"
                       export AWS_SECRET_ACCESS_KEY="''${AWS_SECRET_ACCESS_KEY:-test}"
@@ -63,9 +63,9 @@ in
                       exec aws --endpoint-url="''${AWS_ENDPOINT_URL:-http://localhost:4566}" "$@"
                     '';
                   })
-                  (pkgs.writeShellApplication {
+                  (writeShellApplication {
                     name = "pnpm";
-                    runtimeInputs = [ pkgs.nodejs_24 ];
+                    runtimeInputs = [ nodejs_24 ];
                     text = ''
                       exec corepack pnpm "$@"
                     '';
