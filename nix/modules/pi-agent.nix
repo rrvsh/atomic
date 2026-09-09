@@ -8,8 +8,11 @@ let
   cfg = config.flake;
   osModule = {
     home-manager.sharedModules = [
-      cfg.modules.homeManager.agent-writing-skill
       cfg.modules.homeManager.pi-agent
+      {
+        home.file.".pi/agent/skills/issue-ticket-pr-writing/SKILL.md".source =
+          cfg.paths.root + "/agents/skills/issue-ticket-pr-writing/SKILL.md";
+      }
     ];
   };
 in
@@ -114,12 +117,10 @@ in
             sessionDrainRun
           ]
           ++ lib.optionals pkgs.stdenv.isLinux [ pkgs.chromium ];
-          file = {
-            ".pi/config/pi-agent-browser-native/config.json".text = builtins.toJSON agentBrowserConfig;
-            # Note: this does not show up in the loaded context files, but it is appended to the system prompt.
-            ".pi/agent/APPEND_SYSTEM.md".source =
-              config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/Agents/MEMORY.md";
-          };
+          file.".pi/config/pi-agent-browser-native/config.json".text = builtins.toJSON agentBrowserConfig;
+          # Note: this does not show up in the loaded context files, but it is appended to the system prompt.
+          file.".pi/agent/APPEND_SYSTEM.md".source =
+            config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/Agents/MEMORY.md";
         };
         systemd.user.services.pi-session-drain = {
           Unit.Description = "Drain Pi sessions into agent memory";

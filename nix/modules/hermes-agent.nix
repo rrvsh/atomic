@@ -43,12 +43,11 @@ in
       };
     in
     {
-      imports = [
-        inputs.hermes-agent.nixosModules.default
-        cfg.modules.nixos.agent-writing-skill
-      ];
+      imports = [ inputs.hermes-agent.nixosModules.default ];
       services.hermes-agent = {
         enable = true;
+        hermesHomeFiles."skills/issue-ticket-pr-writing/SKILL.md" =
+          root + "/agents/skills/issue-ticket-pr-writing/SKILL.md";
         addToSystemPackages = true;
         package = inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.minimal;
         extraDependencyGroups = [ "messaging" ];
