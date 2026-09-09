@@ -139,14 +139,23 @@ in
         };
         programs.mcp = {
           enable = true;
-          servers.linear = {
-            url = "https://mcp.linear.app/mcp";
-            auth = "oauth";
-            lifecycle = "lazy";
-            directTools = false;
-            # Keep the shared file in pi-mcp-adapter's native shape.
-            # Home Manager otherwise adds a generic HTTP transport field.
-            type = null;
+          # Keep the shared file in pi-mcp-adapter's native shape.
+          # Home Manager otherwise adds a generic HTTP transport field.
+          servers = {
+            atlassian = {
+              url = "https://mcp.atlassian.com/v2/mcp";
+              auth = "oauth";
+              lifecycle = "lazy";
+              directTools = false;
+              type = null;
+            };
+            linear = {
+              url = "https://mcp.linear.app/mcp";
+              auth = "oauth";
+              lifecycle = "lazy";
+              directTools = false;
+              type = null;
+            };
           };
         };
         programs.pi-coding-agent = {

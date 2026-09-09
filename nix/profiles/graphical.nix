@@ -1,7 +1,7 @@
 {
   config,
-  lib,
   inputs,
+  lib,
   ...
 }:
 let
@@ -29,7 +29,11 @@ in
           remapCapsLockToEscape = true;
         };
       };
-      homebrew.casks = [ "mixxx" ];
+      homebrew.casks = [
+        "mixxx"
+        "linearmouse"
+        "spotify"
+      ];
       home-manager.sharedModules = [
         inputs.mac-app-util.homeManagerModules.default
         {
@@ -37,7 +41,9 @@ in
             alt-tab-macos
             monitorcontrol
           ];
+          # mac-app-util needs the linked app directory to create Spotlight-indexed trampolines.
           targets.darwin.copyApps.enable = lib.mkForce false;
+          targets.darwin.linkApps.enable = true;
         }
       ];
     };
