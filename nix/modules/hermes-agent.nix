@@ -43,7 +43,10 @@ in
       };
     in
     {
-      imports = [ inputs.hermes-agent.nixosModules.default ];
+      imports = [
+        inputs.hermes-agent.nixosModules.default
+        cfg.modules.nixos.agent-writing-skill
+      ];
       services.hermes-agent = {
         enable = true;
         addToSystemPackages = true;
