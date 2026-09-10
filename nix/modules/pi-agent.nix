@@ -7,7 +7,13 @@
 let
   cfg = config.flake;
   osModule = {
-    home-manager.sharedModules = [ cfg.modules.homeManager.pi-agent ];
+    home-manager.sharedModules = [
+      cfg.modules.homeManager.pi-agent
+      {
+        home.file.".pi/agent/skills/issue-ticket-pr-writing/SKILL.md".source =
+          cfg.paths.root + "/agents/skills/issue-ticket-pr-writing/SKILL.md";
+      }
+    ];
   };
 in
 {
